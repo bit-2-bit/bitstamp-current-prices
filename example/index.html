@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>bitstampCurrentPrices Test Suite</title>
+  <!-- Load local jQuery. This can be overridden with a ?jquery=___ param. -->
+  <script src="../libs/jquery-loader.js"></script>
+  
+  <!-- Load local lib (in a real example you'd use the files in the dist/ folder). -->
+  <script src="../build/bitstampCurrentPrices.js"></script>
+
+  <!-- boostrap is not essential but makes it nicer -->
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+  <div class="jumbotron">
+    <h2>Bitstamp latest prices</h2>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>High $AU</th>
+            <th>Last $AU</th>
+            <th>Bid $AU</th>
+            <th>VWap $AU</th>
+            <th>Low $AU</th>
+            <th>Ask $AU</th>
+            <th>Volume</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td  data-price="timestamp"></th>
+            <td  data-price="high"></td>
+            <td  data-price="last"></td>
+            <td  data-price="bid" data-margin="0.93"></td>
+            <td  data-price="vwap"></td>
+            <td  data-price="low"></td>
+            <td  data-price="ask" data-margin="1.07"></td>
+            <td  data-price="volume"></td>
+          </tr>
+        </tbody>
+    </div>
+  </div>
+  <script>
+  $(document).ready(function(){
+    $("td[data-price]").bitstampCurrentPrices();
+  });
+  </script>
+</body>
+</html>
