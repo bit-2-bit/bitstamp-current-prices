@@ -1,5 +1,5 @@
-bitstampCurrentPrices
-=====================
+jquery-bitstampCurrentPrices
+============================
 
 A jQuery Plugin that extracts current prices from
 [the Bitstamp API](https://www.bitstamp.net/api/ticker/) and displays them within the element you specify
@@ -76,6 +76,16 @@ Files created are:
 * `jquery-bitstampCurrentPrices.0.2.1.min.js` The minified version for production use.
 * `jquery-bitstampCurrentPrices.0.2.1.min.map` The `sourcemap` file for debugging using the minified version.
 
-## To use
+### Credits
 
+Written by [Dave Sag](http://cv.davesag.com) for [Bit2Bit](http://www.bit2bit.co).
 
+### License
+
+Released under the MIT License.
+
+### ToDo
+
+* Clean up the tests
+* Detect the amazing [jquery-localtime](https://github.com/GregDThomas/jquery-localtime) plugin by Greg D Thomas and use it to format timestamps.
+* Improve documentation and examples.
