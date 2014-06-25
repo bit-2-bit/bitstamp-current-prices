@@ -19,38 +19,55 @@
     <h2>Bitstamp latest prices</h2>
   </div>
   <div class="row">
-    <div class="col-xs-12">
-      <table class="table">
+    <div class="col-md-10 col-md-offset-1">
+      <table class="table table-striped table-hover table-responsive">
+        <caption>
+          <span data-price="timestamp">loading</span>
+          <span>Volume: <tt data-price="volume">0</tt></span>
+        </caption>
         <thead>
           <tr>
-            <th>Timestamp</th>
-            <th>High $AU</th>
-            <th>Last $AU</th>
-            <th>Bid $AU</th>
-            <th>VWap $AU</th>
-            <th>Low $AU</th>
-            <th>Ask $AU</th>
-            <th>Volume</th>
+            <th>High</th>
+            <th>Last</th>
+            <th>Bid</th>
+            <th>VWap</th>
+            <th>Low</th>
+            <th>Ask</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td  data-price="timestamp"></th>
-            <td  data-price="high"></td>
-            <td  data-price="last"></td>
-            <td  data-price="bid" data-margin="0.93"></td>
-            <td  data-price="vwap"></td>
-            <td  data-price="low"></td>
-            <td  data-price="ask" data-margin="1.07"></td>
-            <td  data-price="volume"></td>
+            <td>$AU <tt class="pull-right" data-price="high"></tt></td>
+            <td>$AU <tt class="pull-right" data-price="last"></tt></td>
+            <td>$AU <tt class="pull-right" data-price="bid" data-margin="0.95"></tt></td>
+            <td>$AU <tt class="pull-right" data-price="vwap"></tt></td>
+            <td>$AU <tt class="pull-right" data-price="low"></tt></td>
+            <td>$AU <tt class="pull-right" data-price="ask" data-margin="1.95"></tt></td>
+          </tr>
+          <tr>
+            <td>$US <tt class="pull-right" data-fiat="USD" data-price="high"></tt></td>
+            <td>$US <tt class="pull-right" data-fiat="USD" data-price="last"></tt></td>
+            <td>$US <tt class="pull-right" data-fiat="USD" data-price="bid" data-margin="0.95"></tt></td>
+            <td>$US <tt class="pull-right" data-fiat="USD" data-price="vwap"></tt></td>
+            <td>$US <tt class="pull-right" data-fiat="USD" data-price="low"></tt></td>
+            <td>$US <tt class="pull-right" data-fiat="USD" data-price="ask" data-margin="1.95"></tt></td>
+          </tr>
+          <tr>
+            <td>£ <tt class="pull-right" data-fiat="GBP" data-price="high"></tt></td>
+            <td>£ <tt class="pull-right" data-fiat="GBP" data-price="last"></tt></td>
+            <td>£ <tt class="pull-right" data-fiat="GBP" data-price="bid" data-margin="0.95"></tt></td>
+            <td>£ <tt class="pull-right" data-fiat="GBP" data-price="vwap"></tt></td>
+            <td>£ <tt class="pull-right" data-fiat="GBP" data-price="low"></tt></td>
+            <td>£ <tt class="pull-right" data-fiat="GBP" data-price="ask" data-margin="1.95"></tt></td>
           </tr>
         </tbody>
+      </table>
     </div>
   </div>
   <script>
-  $(document).ready(function(){
-    $("td[data-price]").bitstampCurrentPrices();
-  });
+    $(document).ready(function(){
+      $("tt[data-price], span[data-price]").bitstampCurrentPrices();
+    });
   </script>
 </body>
 </html>
