@@ -19,7 +19,9 @@ This supports automatic conversions between USD and the following currencies:
 
 It's not 100% accurate, but close, and free.
 
-I also use Yahoo's YQL to wrap the API calls in a JSONP callback handler, thus avoiding any cross-site scripting issues.
+The plugin also automatically detects the amazing [jquery-localtime](https://github.com/GregDThomas/jquery-localtime) plugin by Greg D Thomas format timestamps, otherwise they are displayed in Zulu time.
+
+The plugin takes advantage of Yahoo's YQL to wrap the API calls in a JSONP callback handler, thus avoiding any cross-site scripting issues.
 
 ## To Use
 
@@ -61,7 +63,7 @@ The tests are a bit minimal right now as I added multiple Ajax calls and need to
 grunt test
 ```
 
-## To Build
+## Build it
 
 ```bash
 grunt
@@ -72,10 +74,11 @@ the version number you specify in `package.json`.
 
 Files created are:
 
-* `jquery-bitstampCurrentPrices.0.2.1.js` - the 'developer' version.
-* `jquery-bitstampCurrentPrices.0.2.1.min.js` The minified version for production use.
-* `jquery-bitstampCurrentPrices.0.2.1.min.map` The `sourcemap` file for debugging using the minified version.
+* `jquery-bitstampCurrentPrices.0.2.2.js` - the 'developer' version.
+* `jquery-bitstampCurrentPrices.0.2.2.min.js` The minified version for production use.
+* `jquery-bitstampCurrentPrices.0.2.2.min.map` The `sourcemap` file for debugging using the minified version.
 
+## Errata
 ### Credits
 
 Written by [Dave Sag](http://cv.davesag.com) for [Bit2Bit](http://www.bit2bit.co).
@@ -87,5 +90,4 @@ Released under the MIT License.
 ### ToDo
 
 * Clean up the tests
-* Detect the amazing [jquery-localtime](https://github.com/GregDThomas/jquery-localtime) plugin by Greg D Thomas and use it to format timestamps.
 * Improve documentation and examples.

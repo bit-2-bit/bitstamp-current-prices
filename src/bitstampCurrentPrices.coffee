@@ -134,7 +134,11 @@
           output = if priceField is "volume"
             parseInt(prices[currency][priceField]).toString()
           else
-            (new Date(parseInt(prices[currency][priceField]) * 1000)).toISOString()
+            ts = (new Date(parseInt(prices[currency][priceField]) * 1000)).toISOString()
+            if $.localtime
+              $.localtime.toLocalTime(ts, "dd MMM yyyy 'at' hh:mm:ss a")
+            else
+              ts
           write output
         else
           price = parseFloat(prices[currency][priceField]) * priceMargin / $base.converter.conversions[$fiatCurrency]

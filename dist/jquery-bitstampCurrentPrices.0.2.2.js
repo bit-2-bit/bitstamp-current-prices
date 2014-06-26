@@ -1,5 +1,5 @@
 /*!
- * Display the latest Bitstamp Bitcoin prices with jquery-bitstampCurrentPrices - v0.2.1 - 2014-06-25
+ * Display the latest Bitstamp Bitcoin prices with jquery-bitstampCurrentPrices - v0.2.2 - 2014-06-26
  * https://github.com/bit-2-bit/bitstamp-current-prices
  * Copyright (c) 2014 Dave Sag; Licensed MIT
  */
@@ -181,9 +181,9 @@
           }
         };
         $(document).on("price-change", function(evt, prices) {
-          var output, price;
+          var output, price, ts;
           if (priceField === "volume" || priceField === "timestamp") {
-            output = priceField === "volume" ? parseInt(prices[currency][priceField]).toString() : (new Date(parseInt(prices[currency][priceField]) * 1000)).toISOString();
+            output = priceField === "volume" ? parseInt(prices[currency][priceField]).toString() : (ts = (new Date(parseInt(prices[currency][priceField]) * 1000)).toISOString(), $.localtime ? $.localtime.toLocalTime(ts, "dd MMM yyyy 'at' hh:mm:ss a") : ts);
             write(output);
           } else {
             price = parseFloat(prices[currency][priceField]) * priceMargin / $base.converter.conversions[$fiatCurrency];
