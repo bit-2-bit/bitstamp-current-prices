@@ -37,7 +37,7 @@ example to reduce the price by 5%.
 Then add
 ```javascript
 $(document).ready(function(){
-  $("span[data-price]").bitstampCurrentPrice();
+  $("span[data-price]").bitstampCurrentPrices();
 });
 ```
 
