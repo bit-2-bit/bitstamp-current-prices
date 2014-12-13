@@ -74,11 +74,12 @@ the version number you specify in `package.json`.
 
 Files created are:
 
-* `jquery-bitstampCurrentPrices.0.2.2.js` - the 'developer' version.
-* `jquery-bitstampCurrentPrices.0.2.2.min.js` The minified version for production use.
-* `jquery-bitstampCurrentPrices.0.2.2.min.map` The `sourcemap` file for debugging using the minified version.
+* `jquery-bitstampCurrentPrices.0.3.0.js` - the 'developer' version.
+* `jquery-bitstampCurrentPrices.0.3.0.min.js` The minified version for production use.
+* `jquery-bitstampCurrentPrices.0.3.0.min.map` The `sourcemap` file for debugging using the minified version.
 
 ## Errata
+
 ### Credits
 
 Written by [Dave Sag](http://cv.davesag.com) for [Bit2Bit](http://www.bit2bit.co).
@@ -86,6 +87,20 @@ Written by [Dave Sag](http://cv.davesag.com) for [Bit2Bit](http://www.bit2bit.co
 ### License
 
 Released under the MIT License.
+
+### Version History
+
+Version `0.3`
+
+* improved error handling in the case where an API service is returning errors.
+
+Version `0.2.2`
+
+* added auto-currency conversion
+
+Version `0.2.0`
+
+* initial release
 
 ### ToDo
 
