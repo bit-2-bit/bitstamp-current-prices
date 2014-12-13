@@ -1,5 +1,5 @@
 /*!
- * Display the latest Bitstamp Bitcoin prices with jquery-bitstampCurrentPrices - v0.2.2 - 2014-06-26
+ * Display the latest Bitstamp Bitcoin prices in your local curreny with jquery-bitstampCurrentPrices - v0.3.0 - 2014-12-13
  * https://github.com/bit-2-bit/bitstamp-current-prices
  * Copyright (c) 2014 Dave Sag; Licensed MIT
  */
@@ -14,7 +14,7 @@
   (function($) {
     var CURRENCIES, CurrencyConverter, PRICE_FIELDS, PriceLoader;
     PRICE_FIELDS = ["bid", "ask", "last", "high", "low", "vwap", "volume", "timestamp"];
-    CURRENCIES = ["AUD", "BRL", "CAD", "CHF", "CNY", "EUR", "GBP", "HKD", "IDR", "ILS", "MXN", "NOK", "NZD", "PLN", "RON", "RUB", "SEK", "SGD", "TRY", "USD", "ZAR"];
+    CURRENCIES = ["AUD", "BRL", "CAD", "CHF", "CNY", "EUR", "GBP", "IDR", "ILS", "MXN", "NOK", "NZD", "PLN", "RON", "RUB", "SEK", "SGD", "USD", "ZAR"];
     CurrencyConverter = (function() {
       var PrivateCurrencyConverter, instance;
 
@@ -42,8 +42,12 @@
                 _this.basePrice = parseFloat(data.USD["24h_avg"]);
                 for (_i = 0, _len = CURRENCIES.length; _i < _len; _i++) {
                   currency = CURRENCIES[_i];
-                  if (data[currency]["24h_avg"]) {
-                    _this.conversions[currency] = _this.basePrice / parseFloat(data[currency]["24h_avg"]);
+                  if (data[currency]) {
+                    if (data[currency]["24h_avg"]) {
+                      _this.conversions[currency] = _this.basePrice / parseFloat(data[currency]["24h_avg"]);
+                    }
+                  } else {
+                    console.error("Currency", currency, "is no longer supplied by BitcoinAverage");
                   }
                 }
                 _this.lastLoadTime = new Date();
@@ -108,19 +112,28 @@
           var andFinally, handleData, handleFail, query, yqlUrl;
           handleData = (function(_this) {
             return function(jsonp) {
-              var data;
-              data = $.parseJSON(jsonp.query.results.body.p);
-              if (data) {
-                _this.prices.btc = data;
-                _this.lastLoadTime = new Date();
-                $(document).trigger("price-change", [_this.prices]);
-              } else {
-                console.error("server returned", jsonp.query.results.body.p);
+              var data, err;
+              try {
+                if (!jsonp.query.results.body.p) {
+                  console.error("Missing API results for Bitstamp API.");
+                  console.debug("jsonp.query.results.body", jsonp.query.results.body);
+                }
+                data = $.parseJSON(jsonp.query.results.body.p);
+                if (data) {
+                  _this.prices.btc = data;
+                  _this.lastLoadTime = new Date();
+                  $(document).trigger("price-change", [_this.prices]);
+                } else {
+                  console.error("server returned", jsonp.query.results.body.p);
+                }
+              } catch (_error) {
+                err = _error;
+                console.error("Caught error", err);
               }
             };
           })(this);
           handleFail = function(err) {
-            console.error(err);
+            console.error("failed to loadPrices", err);
           };
           andFinally = (function(_this) {
             return function() {
@@ -186,8 +199,12 @@
             output = priceField === "volume" ? parseInt(prices[currency][priceField]).toString() : (ts = (new Date(parseInt(prices[currency][priceField]) * 1000)).toISOString(), $.localtime ? $.localtime.toLocalTime(ts, "dd MMM yyyy 'at' hh:mm:ss a") : ts);
             write(output);
           } else {
-            price = parseFloat(prices[currency][priceField]) * priceMargin / $base.converter.conversions[$fiatCurrency];
-            write(price.toFixed(2));
+            if ($base.converter.conversions[$fiatCurrency]) {
+              price = parseFloat(prices[currency][priceField]) * priceMargin / $base.converter.conversions[$fiatCurrency];
+              write(price.toFixed(2));
+            } else {
+              write("err");
+            }
           }
         });
         return $this;

@@ -2,8 +2,8 @@
 
   PRICE_FIELDS = ["bid", "ask", "last", "high", "low", "vwap", "volume", "timestamp"]
   # okay so timestamp and volume are not technically prices.
-  CURRENCIES = ["AUD", "BRL", "CAD", "CHF", "CNY", "EUR", "GBP", "HKD", "IDR", "ILS", "MXN", 
-                "NOK", "NZD", "PLN", "RON", "RUB", "SEK", "SGD", "TRY", "USD", "ZAR"]
+  CURRENCIES = ["AUD", "BRL", "CAD", "CHF", "CNY", "EUR", "GBP", "IDR", "ILS", "MXN", 
+                "NOK", "NZD", "PLN", "RON", "RUB", "SEK", "SGD", "USD", "ZAR"]
   
   class CurrencyConverter
     instance = null
@@ -22,7 +22,10 @@
           if data
             @basePrice = parseFloat(data.USD["24h_avg"])
             for currency in CURRENCIES
-              @conversions[currency] = @basePrice / parseFloat(data[currency]["24h_avg"]) if data[currency]["24h_avg"]
+              if data[currency]
+                @conversions[currency] = @basePrice / parseFloat(data[currency]["24h_avg"]) if data[currency]["24h_avg"]
+              else
+                console.error "Currency", currency, "is no longer supplied by BitcoinAverage"
             @lastLoadTime = new Date()
             callback() if typeof callback is "function"
           else
@@ -65,18 +68,24 @@
       loadPrices: ->
         # https://www.bitstamp.com.au/pubapi/latest
         handleData = (jsonp) =>
-          data = $.parseJSON(jsonp.query.results.body.p);
-          if data
-            @prices.btc = data
-            @lastLoadTime = new Date()
-            # console.debug "prices set to", @prices, "at", @lastLoadTime
-            $(document).trigger "price-change", [@prices]
-          else
-            console.error "server returned", jsonp.query.results.body.p
+          try
+            unless jsonp.query.results.body.p
+              console.error "Missing API results for Bitstamp API."
+              console.debug "jsonp.query.results.body", jsonp.query.results.body
+            data = $.parseJSON(jsonp.query.results.body.p);
+            if data
+              @prices.btc = data
+              @lastLoadTime = new Date()
+              # console.debug "prices set to", @prices, "at", @lastLoadTime
+              $(document).trigger "price-change", [@prices]
+            else
+              console.error "server returned", jsonp.query.results.body.p
+          catch err
+            console.error "Caught error", err
           return
 
         handleFail = (err) ->
-          console.error err
+          console.error "failed to loadPrices", err
           return
 
         andFinally = =>
@@ -141,8 +150,11 @@
               ts
           write output
         else
-          price = parseFloat(prices[currency][priceField]) * priceMargin / $base.converter.conversions[$fiatCurrency]
-          write price.toFixed(2)
+          if $base.converter.conversions[$fiatCurrency]
+            price = parseFloat(prices[currency][priceField]) * priceMargin / $base.converter.conversions[$fiatCurrency]
+            write price.toFixed(2)
+          else
+            write "err"
         return
       return $this # because it's chainable.
 ) jQuery
