@@ -2,8 +2,8 @@
 
   PRICE_FIELDS = ["bid", "ask", "last", "high", "low", "vwap", "volume", "timestamp"]
   # okay so timestamp and volume are not technically prices.
-  CURRENCIES = ["AUD", "BRL", "CAD", "CHF", "CNY", "EUR", "GBP", "HKD", "IDR", "ILS", "MXN", 
-                "NOK", "NZD", "PLN", "RON", "RUB", "SEK", "SGD", "TRY", "USD", "ZAR"]
+  CURRENCIES = ["AUD", "BRL", "CAD", "CHF", "CNY", "EUR", "GBP", "IDR", "ILS", "MXN", 
+                "NOK", "NZD", "PLN", "RON", "RUB", "SEK", "SGD", "USD", "ZAR"]
   
   class CurrencyConverter
     instance = null

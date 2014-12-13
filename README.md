@@ -14,8 +14,8 @@ necessary multiplications based on the 24 hour average weighted price in each cu
 
 This supports automatic conversions between USD and the following currencies:
 
-    ["AUD", "BRL", "CAD", "CHF", "CNY", "EUR", "GBP", "HKD", "IDR", "ILS", "MXN", 
-    "NOK", "NZD", "PLN", "RON", "RUB", "SEK", "SGD", "TRY", "USD", "ZAR"]
+    ["AUD", "BRL", "CAD", "CHF", "CNY", "EUR", "GBP", "IDR", "ILS", "MXN", 
+     "NOK", "NZD", "PLN", "RON", "RUB", "SEK", "SGD", "USD", "ZAR"]
 
 It's not 100% accurate, but close, and free.
 
