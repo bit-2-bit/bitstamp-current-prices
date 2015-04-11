@@ -38,8 +38,7 @@
       #     count: 1
       #     created: new Date().toISOString()
       #     results:
-      #       body:
-      #         p: JSON.stringify this.responseBody
+      #       body: JSON.stringify this.responseBody
       deferred = $.Deferred()
       # deferred.resolveWith(null, [jsonpWrapper])
       stub = sinon.stub($, "getJSON").returns deferred

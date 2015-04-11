@@ -18,7 +18,7 @@
 
       loadConversions: (callback) ->
         handleData = (jsonp) =>
-          data = $.parseJSON(jsonp.query.results.body.p);
+          data = $.parseJSON(jsonp.query.results.body);
           if data
             @basePrice = parseFloat(data.USD["24h_avg"])
             for currency in CURRENCIES
@@ -29,7 +29,7 @@
             @lastLoadTime = new Date()
             callback() if typeof callback is "function"
           else
-            console.error "server returned", jsonp.query.results.body.p
+            console.error "server returned", jsonp.query.results.body
           return
 
         handleFail = (err) ->
@@ -69,17 +69,17 @@
         # https://www.bitstamp.com.au/pubapi/latest
         handleData = (jsonp) =>
           try
-            unless jsonp.query.results.body.p
+            unless jsonp.query.results.body
               console.error "Missing API results for Bitstamp API."
               console.debug "jsonp.query.results.body", jsonp.query.results.body
-            data = $.parseJSON(jsonp.query.results.body.p);
+            data = $.parseJSON(jsonp.query.results.body);
             if data
               @prices.btc = data
               @lastLoadTime = new Date()
               # console.debug "prices set to", @prices, "at", @lastLoadTime
               $(document).trigger "price-change", [@prices]
             else
-              console.error "server returned", jsonp.query.results.body.p
+              console.error "server returned", jsonp.query.results.body
           catch err
             console.error "Caught error", err
           return

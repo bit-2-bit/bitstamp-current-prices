@@ -1,7 +1,7 @@
 /*!
- * Display the latest Bitstamp Bitcoin prices in your local curreny with jquery-bitstampCurrentPrices - v0.3.0 - 2014-12-13
+ * Display the latest Bitstamp Bitcoin prices in your local curreny with jquery-bitstampCurrentPrices - v0.4.0 - 2015-04-11
  * https://github.com/bit-2-bit/bitstamp-current-prices
- * Copyright (c) 2014 Dave Sag; Licensed MIT
+ * Copyright (c) 2015 Dave Sag; Licensed MIT
  */
 (function() {
   if (typeof jQuery !== "function") {
@@ -37,7 +37,7 @@
           handleData = (function(_this) {
             return function(jsonp) {
               var currency, data, _i, _len;
-              data = $.parseJSON(jsonp.query.results.body.p);
+              data = $.parseJSON(jsonp.query.results.body);
               if (data) {
                 _this.basePrice = parseFloat(data.USD["24h_avg"]);
                 for (_i = 0, _len = CURRENCIES.length; _i < _len; _i++) {
@@ -55,7 +55,7 @@
                   callback();
                 }
               } else {
-                console.error("server returned", jsonp.query.results.body.p);
+                console.error("server returned", jsonp.query.results.body);
               }
             };
           })(this);
@@ -114,17 +114,17 @@
             return function(jsonp) {
               var data, err;
               try {
-                if (!jsonp.query.results.body.p) {
+                if (!jsonp.query.results.body) {
                   console.error("Missing API results for Bitstamp API.");
                   console.debug("jsonp.query.results.body", jsonp.query.results.body);
                 }
-                data = $.parseJSON(jsonp.query.results.body.p);
+                data = $.parseJSON(jsonp.query.results.body);
                 if (data) {
                   _this.prices.btc = data;
                   _this.lastLoadTime = new Date();
                   $(document).trigger("price-change", [_this.prices]);
                 } else {
-                  console.error("server returned", jsonp.query.results.body.p);
+                  console.error("server returned", jsonp.query.results.body);
                 }
               } catch (_error) {
                 err = _error;
