@@ -74,9 +74,9 @@ the version number you specify in `package.json`.
 
 Files created are:
 
-* `jquery-bitstampCurrentPrices.0.3.0.js` - the 'developer' version.
-* `jquery-bitstampCurrentPrices.0.3.0.min.js` The minified version for production use.
-* `jquery-bitstampCurrentPrices.0.3.0.min.map` The `sourcemap` file for debugging using the minified version.
+* `jquery-bitstampCurrentPrices.0.4.0.js` - the 'developer' version.
+* `jquery-bitstampCurrentPrices.0.4.0.min.js` The minified version for production use.
+* `jquery-bitstampCurrentPrices.0.4.0.min.map` The `sourcemap` file for debugging using the minified version.
 
 ## Errata
 
@@ -89,6 +89,10 @@ Written by [Dave Sag](http://cv.davesag.com) for [Bit2Bit](http://www.bit2bit.co
 Released under the MIT License.
 
 ### Version History
+
+Version `0.4`
+
+* Yahoo changed how its YQL system returns `jsonp` data so this is just a bugfix release
 
 Version `0.3`
 

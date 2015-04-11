@@ -2,7 +2,7 @@
   "name": "bitstampCurrentPrices",
   "title": "Display the latest Bitstamp Bitcoin prices in your local curreny with jquery-bitstampCurrentPrices",
   "description": "A jQuery plugin that retreives and displays the latest Bitstamp Bitcoin prices in a range of currencies.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "bitstampCurrentPrices.js",
   "homepage": "https://github.com/bit-2-bit/bitstamp-current-prices",
   "author": {
